@@ -64,14 +64,26 @@ public class DispensadorMecato {
     }
 
     public void aumentarStock(int codigo, int cantidad) {
-        int nuevaCantidad = 0;
-        for (int i = 0; i < this.productos.size(); i++) {
-            if (this.productos.get(i).getCodigo() == codigo) {
-                nuevaCantidad = cantidad + this.productos.get(i).getCantidadActual();
-                this.productos.get(i).aumentarStck(cantidad);
+        for (Mecato mec : this.getProductos()) {
+            if (mec.getCodigo() == codigo) {
+                if ((cantidad + mec.getCantidadActual()) < 8) {
+                    this.productos.stream()
+                            .filter(mecato -> mecato.getCodigo() == codigo)
+                            .findFirst()
+                            .ifPresent(mecato -> mecato.setCantidadActual(cantidad + mecato.getCantidadActual()));
+
+                    System.out.println("Se agregó al stock del producto " + codigo + " exitosamente " + cantidad + " unidades" );
+
+                } else {
+                    this.productos.stream()
+                            .filter(mecato -> mecato.getCodigo() == codigo)
+                            .findFirst()
+                            .ifPresent(mecato -> mecato.setCantidadActual(8));
+
+                    System.out.println("El valor excede la cantidad máxima, el nuevo valor del stock del producto " + mec.getNombre() + " es de 8 unidades");
+                }
             }
         }
-        System.out.println("Se agrego al stock exitosamente " + cantidad + " productos, la nueva cantidad es: " + nuevaCantidad);
     }
 
     public String getMarca() {

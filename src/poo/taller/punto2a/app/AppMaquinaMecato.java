@@ -12,7 +12,7 @@ public class AppMaquinaMecato {
         DispensadorMecato maquinaMecato = new DispensadorMecato("AutoSnack");
 
         Mecato producto1 = new Mecato(101, "Doritos", 1800, 3);
-        Mecato producto2 = new Mecato(102, "Choclitos", 1200, 13);
+        Mecato producto2 = new Mecato(102, "Choclitos", 1200, 1);
         Mecato producto3 = new Mecato(103, "Detodito", 2000, 4);
         Mecato producto4 = new Mecato(104, "Red Bull", 5500, 2);
         Mecato producto5 = new Mecato(105, "Monster", 6000, 1);
@@ -20,7 +20,7 @@ public class AppMaquinaMecato {
         Mecato producto7 = new Mecato(107, "Jet", 1500, 5);
         Mecato producto8 = new Mecato(108, "Coca Cola", 2500, 0);
         Mecato producto9 = new Mecato(109, "Trident", 1000, 10);
-        Mecato producto10 = new Mecato(110, "Halls", 1100, 15);
+        Mecato producto10 = new Mecato(110, "Halls", 1100, 7);
 
         maquinaMecato.getProductos().add(producto1);
         maquinaMecato.getProductos().add(producto2);
@@ -39,7 +39,7 @@ public class AppMaquinaMecato {
         maquinaMecato.consultarAgotados();
 
         maquinaMecato.consultarUnidades(108);
-        maquinaMecato.aumentarStock(108, 5);
+        maquinaMecato.aumentarStock(108, 10);
         maquinaMecato.consultarUnidades(108);
         maquinaMecato.consultarAgotados();
         maquinaMecato.consultarTotalUnidades();
@@ -58,6 +58,9 @@ public class AppMaquinaMecato {
         maquinaMecato.sacarUnidad("Coca Cola");
         maquinaMecato.consultarUnidades(108);
         maquinaMecato.consultarTotalUnidades();
+        maquinaMecato.consultarAgotados();
+        maquinaMecato.aumentarStock(102, 10);
+        maquinaMecato.consultarUnidades(102);
         maquinaMecato.consultarAgotados();
     }
 

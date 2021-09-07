@@ -28,6 +28,7 @@ public class Mecato {
         }
     }
 
+
     public void aumentarStck(int CantidadAAumentar) {
         this.cantidadActual = this.cantidadActual + CantidadAAumentar;
     }
