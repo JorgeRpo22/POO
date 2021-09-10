@@ -43,8 +43,13 @@ public class AppAgenda {
 
 
         agendaJorge.OrdenarContactosOrdenAlfabetico();
-
-
+        System.out.println(
+                "------------------------------------------lista contactos despues de ordenarla alfabeticamente \n ");
+        // listar los contactos existentes ordenados alfabeticamente
+        for (Contacto c : agendaJorge.getContactos()) {
+            System.out.println("Contacto #" + agendaJorge.getContactos().indexOf(c) + ". Nombre " + c.getNombre()
+                    + " , Apellido: " + c.getApellido() + " ,  Numero Celular: " + c.getNumeroCelular() + "\n");
+        }
 
 
 

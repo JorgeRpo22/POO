@@ -83,13 +83,16 @@ public class AgendaTelefonica {
         System.out.println("Se cambio exitosamente el número de celular ");
     }
 
-    public List<Contacto> OrdenarContactosOrdenAlfabetico() {
-        List<Contacto> OrdenAlfabetico = new ArrayList<>();
-//        int[] nombres = {4, 2, 6, -3, 10, 11, 166, 1};
-//        Arrays.sort(nombres);
-//        for (int i : nombres) {
-//            System.out.print(i + ", ");
-        return OrdenAlfabetico;
+    public void OrdenarContactosOrdenAlfabetico() {
+        //List<String> OrdenAlfabetico = new ArrayList<>();
+        Collections.sort(contactos, Comparator.comparing(Contacto::getNombre));
+        //contactos = contactos.stream().sorted(Comparator.comparingInt(contacto::getnombre).reversed()).collect(Collectors.toList());
+
+        //this.contactos.forEach(contacto -> {
+        //    OrdenAlfabetico.add(contacto.getNombre() + " - " + contacto.getApellido() + " - " + contacto.getNumeroCelular());
+        //});
+
+        //return OrdenAlfabetico;
     }
 
     public String getVersion() {
