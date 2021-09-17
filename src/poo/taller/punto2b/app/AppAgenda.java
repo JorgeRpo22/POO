@@ -49,6 +49,6 @@ public class AppAgenda {
             System.out.println("Contacto #" + agendaJorge.getContactos().indexOf(contact) + ". Nombre " + contact.getNombre()
                     + " , Apellido: " + contact.getApellido() + " ,  Número Celular: " + contact.getNumeroCelular());
         }
-        
+
     }
 }
