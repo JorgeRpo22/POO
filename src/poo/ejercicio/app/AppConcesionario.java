@@ -3,8 +3,6 @@ package poo.ejercicio.app;
 import poo.ejercicio.dominio.Concesionario;
 import poo.ejercicio.dominio.Moto;
 
-import javax.imageio.stream.MemoryCacheImageOutputStream;
-import java.util.List;
 
 public class AppConcesionario {
     public static void main(String[] args) {
@@ -25,12 +23,30 @@ public class AppConcesionario {
         incolmotos.getMotos().add(mot5);
         incolmotos.getMotos().add(mot6);
 
+
+        System.out.println("\n MOTOS SERIAL");
         Moto motoABuscar = incolmotos.buscar(56140);
         System.out.println("Se encontró la moto marca: " + motoABuscar.getMarca() + " con número serial: " + motoABuscar.getSerial() + "," + " Cilindraje: " + motoABuscar.getCilindraje() + "," + " Precio: " + motoABuscar.getPrecio());
 
+        System.out.println("\n MARCAS MOTOS");
+        for (Moto mot : incolmotos.buscar("Yamaha")) {
+            System.out.println("Se encontró la moto marca: " + mot.getMarca() + "," + " con serial: " +mot.getSerial());
+        }
 
         System.out.println("\n MOTOS NUEVAS");
+        for (Moto moto : incolmotos.buscar(true)) {
+            System.out.println("Se encontraron las siguientes motos nuevas: " + moto.getMarca() + "," + " con serial: " +moto.getSerial());
+        }
+
+
+        System.out.println("\n MOTOS MAYOR CILINDRAJE");
+        System.out.println("\n MOTOS NUEVAS");
+        for (Moto moto : incolmotos.buscarQueTenganMasDe(125)) {
+            System.out.println("Se encontraron las siguientes motos nuevas: " + moto.getMarca() + "," + " con serial: " +moto.getSerial());
+        }
+
 
 
     }
 }
+

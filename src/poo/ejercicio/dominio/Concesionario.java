@@ -43,15 +43,21 @@ public class Concesionario {
     public List<Moto> buscar(boolean soloNuevas) {
         List<Moto> buscarNuevas = new ArrayList<>();
 
-        for (Moto nueva : this.motos) {
-            if (nueva.isEsNueva() == true) {
-                buscarNuevas.add(nueva);
-                System.out.println(buscarNuevas);
-                return buscarNuevas;
-            } else {
-                return null;
-            }
-        }
+        //Funcional
+        buscarNuevas = this.motos.stream()
+                .filter(mot -> mot.isEsNueva() == true)
+                .collect(Collectors.toList());
+
+        return buscarNuevas;
+//        for (Moto nueva : this.motos) {
+//            if (nueva.isEsNueva() == true) {
+//                buscarNuevas.add(nueva);
+//                System.out.println(buscarNuevas);
+//                return buscarNuevas;
+//            } else {
+//                return null;
+//            }
+//        }
 
 //        for (int i = 0; i < this.motos.size(); i++) {
 //            //Moto motoNueva = this.motos.get(i);
@@ -64,12 +70,23 @@ public class Concesionario {
 //            }
 //
 //        }
-        return null;
     }
 
     public List<Moto> buscarQueTenganMasDe(int cilindraje) {
+        List<Moto> motoMayorCilindraje = new ArrayList<>();
+
+        for (int i = 0; i < this.motos.size(); i++) {
+            if (this.motos.get(i).getCilindraje() >= cilindraje) {
+                motoMayorCilindraje.add(this.motos.get(i));
+                System.out.println(this.motos.get(i).getMarca());
+                return motoMayorCilindraje;
+            } else {
+                return null;
+            }
+        }
         return null;
     }
+
 
     public void vender(Moto moto) {
 
