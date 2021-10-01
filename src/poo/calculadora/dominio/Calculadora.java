@@ -1,13 +1,20 @@
 package poo.calculadora.dominio;
 
+import poo.calculadora.app.AppCalculadora;
+
+import javax.swing.*;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Calculadora {
+
 
     public static double sumar(ArrayList<Double> numeros) {
         double suma = 0;
 
-        if(numeros.size() != 0) {
+        if (numeros.size() != 0) {
             for (double numero : numeros) {
                 suma += numero;
             }
@@ -18,7 +25,7 @@ public class Calculadora {
     public static double restar(ArrayList<Double> numeros) {
         double resta = 0;
 
-        if(numeros.size() != 0) {
+        if (numeros.size() != 0) {
             resta = numeros.get(0);
 
             for (int i = 1; i < numeros.size(); i++) {
@@ -31,7 +38,7 @@ public class Calculadora {
     public static double multiplicar(ArrayList<Double> numeros) {
         double producto = 1;
 
-        if(numeros.size() != 0) {
+        if (numeros.size() != 0) {
             for (double numero : numeros) {
 
                 producto *= numero;
@@ -40,15 +47,32 @@ public class Calculadora {
         return producto;
     }
 
-    public static double dividir(double num1, double num2) {
-        double cociente = 0;
+//    public static double dividir(double num1, double num2) {
+//        double cociente = 0;
+//
+//        if(num2 != 0) {
+//            cociente = num1 / num2;
+//        } else {
+//            //System.out.println("Math ERROR");
+//            String dato = "Math ERROR";
+//            JOptionPane.showMessageDialog(null, dato, "Resultado", JOptionPane.INFORMATION_MESSAGE, null);
+//        }
+//        return cociente;
+//    }
 
-        if(num2 != 0) {
-            cociente=num1/num2;
-        } else {
-            System.out.println("Math ERROR");
+    public static double dividir(ArrayList<Double> numeros) {
+        double cont = 1;
+        double resultado = 1;
+
+        for (double num : numeros) {
+            if (cont == 1) {
+                resultado = num;
+                cont++;
+            } else {
+                resultado = resultado / num;
+                cont++;
+            }
         }
-        return cociente;
+        return resultado;
     }
-
 }

@@ -11,51 +11,87 @@ public class AppCalculadora {
     private static final int OPCION_RESTAR = 1;
     private static final int OPCION_MULTIPLICAR = 2;
     private static final int OPCION_DIVIDIR = 3;
+    private static int numeroComponentes;
 
     public static void main(String[] args) {
+        JCheckBox redondear= new JCheckBox("¿Redondear?");
 
         while(true) {
-            JCheckBox redondear= new JCheckBox("¿Redondear?");
             ImageIcon icono=new ImageIcon(Calculadora.class.getResource("uco.png"));
-            int opcionElegida= JOptionPane.showOptionDialog(null, "¿Que quieres hacer?", "Calculadora  UCO-POO", 0,JOptionPane.PLAIN_MESSAGE, icono, new Object[] {"Sumar","Restar","Multiplicar","Dividir",redondear},null);
+            numeros = new ArrayList<Double>();
+
+            int opcionElegida= JOptionPane.showOptionDialog(null,
+                    "¿Que quieres hacer?", "Calculadora  UCO-POO", 0,
+                    JOptionPane.PLAIN_MESSAGE, icono, new Object[] {"Sumar","Restar","Multiplicar","Dividir",redondear},
+                    null);
 
             switch (opcionElegida) {
                 case OPCION_SUMAR:
-                    recibirNumeros();
-                    if(redondear.isEnabled()) {
-                        mostrarMensaje(Math.floor(Calculadora.sumar(numeros)));
+                    ingresarNumeros();
+                    if(redondear.isSelected()) {
+                        mostrarMensajeDato(Math.round(Calculadora.sumar(numeros)));
                     }else {
-                        mostrarMensaje(Calculadora.sumar(numeros));
+                        mostrarMensajeDato(Calculadora.sumar(numeros));
                     }
+                    numeros.clear();
                     break;
 
                 case OPCION_RESTAR:
-                    recibirNumeros();
-                    if(redondear.isEnabled()) {
-                        mostrarMensaje(Math.floor(Calculadora.restar(numeros)));
+                    numeros = new ArrayList<Double>();
+                    ingresarNumeros();
+                    if(redondear.isSelected()) {
+                        mostrarMensajeDato(Math.round(Calculadora.restar(numeros)));
                     }else {
-                        mostrarMensaje(Calculadora.restar(numeros));
+                        mostrarMensajeDato(Calculadora.restar(numeros));
                     }
+                    numeros.clear();
                     break;
 
                 case OPCION_MULTIPLICAR:
-                    recibirNumeros();
-                    if(redondear.isEnabled()) {
-                        mostrarMensaje(Math.floor(Calculadora.multiplicar(numeros)));
+                    numeros = new ArrayList<Double>();
+                    ingresarNumeros();
+                    if(redondear.isSelected()) {
+                        mostrarMensajeDato(Math.round(Calculadora.multiplicar(numeros)));
                     }else {
-                        mostrarMensaje(Calculadora.multiplicar(numeros));
+                        mostrarMensajeDato(Calculadora.multiplicar(numeros));
                     }
+                    numeros.clear();
                     break;
 
                 case OPCION_DIVIDIR:
-                    int num1=Integer.parseInt(JOptionPane.showInputDialog("Ingrese un numero"));
-                    int num2=Integer.parseInt(JOptionPane.showInputDialog("Ingrese un numero"));
-                    if(redondear.isEnabled()) {
-                        mostrarMensaje(Math.floor(Calculadora.dividir(num1,num2)));
-                    }else {
-                        mostrarMensaje(Calculadora.dividir(num1, num2));
+                    numeros = new ArrayList<Double>();
+                    numeroComponentes = ingresarNumeroComponentes();
+                    for(int i = 0; i< numeroComponentes; i++){
+                        double numero = 0;
+                        do{
+                            try{
+                                numero = ingresarNumero();
+                                numeros.add(numero);
+                            }catch (NumberFormatException error){
+                                mostrarMensaje("Formato invalido, debe ingresar un número");
+                            }
+                            //System.out.println(numeros);
+                        }while(numero<0);
                     }
+                    if(redondear.isSelected()) {
+                        mostrarMensajeDato(Math.round(Calculadora.dividir(numeros)));
+                    }else {
+                        mostrarMensajeDato(Calculadora.dividir(numeros));
+                    }
+                    numeros.clear();
                     break;
+
+//                    double numero = 0;
+//                    numeros = new ArrayList<Double>();
+//                    ingresarNumeros();
+//                    //int num1=Integer.parseInt(JOptionPane.showInputDialog("Ingrese un número"));
+//                    //int num2=Integer.parseInt(JOptionPane.showInputDialog("Ingrese un número"));
+//                    if(redondear.isSelected()) {
+//                        mostrarMensajeDato(Math.round(Calculadora.dividir(num1, num2)));
+//                    }else {
+//                        mostrarMensajeDato(Calculadora.dividir(num1, num2));
+//                    }
+//                    break;
 
                 default:
                     break;
@@ -64,51 +100,111 @@ public class AppCalculadora {
             if(opcionElegida==JOptionPane.CLOSED_OPTION) {
                 break;
             }
+            if(opcionElegida==JOptionPane.CANCEL_OPTION) {
+
+            }
         }
     }
 
     public static void mostrarCuadrodeDialogo() {
-        String num=JOptionPane.showInputDialog("Ingrese un numero");
-        String condicion="";
-        if(num.equals(condicion)) {
-            while(num.equals(condicion)) {
-                num=JOptionPane.showInputDialog("Ingrese un numero","Debes ingresar algun numero");
-                condicion="Debes ingresar algun numero";
+        double numero = 0;
+
+        do {
+            try {
+                String num = JOptionPane.showInputDialog("Ingrese un número");
+                numero = Double.parseDouble(num);
+                numeros.add(numero);
+            } catch (NumberFormatException e) {
+                mostrarMensaje("Formato invalido, debe ingresar un número");
             }
-        }else {
-            double numero=Double.parseDouble(num);
-            numeros.add(numero);
-        }
+        } while (numero != (double) numero);
+
     }
 
-    public static int cuadroContinuar() {
-        int confirmacion=JOptionPane.showConfirmDialog(null, "�Desea agregar mas numeros?", "", JOptionPane.YES_NO_OPTION);
-        int si_no=0;
+    public static int deseaContinuar() {
+        int confirmacion = JOptionPane.showConfirmDialog(null, "¿Desea agregar más números?", "", JOptionPane.YES_NO_OPTION);
+        int AgregarMasNumeros = 0;
+
         switch (confirmacion) {
             case JOptionPane.YES_OPTION:
-                si_no=1;
+                AgregarMasNumeros = 1;
+                ingresarMasNumeros();
                 break;
             default:
                 break;
         }
-        return si_no;
+        return AgregarMasNumeros;
     }
 
-    public static void mostrarMensaje(double dato) {
+    public static void mostrarMensajeDato(double dato) {
         JOptionPane.showMessageDialog(null, dato, "Resultado", JOptionPane.INFORMATION_MESSAGE, null);
     }
 
-    public static void recibirNumeros() {
-        int si_no;
+    public static void mostrarMensaje(String mensaje) {
+        JOptionPane.showMessageDialog(null, mensaje, "POO", JOptionPane.PLAIN_MESSAGE);
+    }
+
+    public static double ingresarNumero(){
+        do{
+            try{
+                double numero = Double.parseDouble(JOptionPane.showInputDialog("Ingrese el numero: "));
+                return numero;
+            }catch(NumberFormatException ee){
+                JOptionPane.showMessageDialog(null,"Numero ingresado no valido");
+                continue;
+            }
+        }while(true);
+    }
+
+    public static void ingresarNumeros() {
+        double numero = 0;
+        int AgregarMasNumeros;
+
+        do {
+            try {
+                mostrarCuadrodeDialogo();
+            } catch (NumberFormatException e) {
+                mostrarMensaje("Formato invalido, debe ingresar un número");
+            }
+        } while (numero != (double) numero);
 
         mostrarCuadrodeDialogo();
-        mostrarCuadrodeDialogo();
-        si_no=cuadroContinuar();
-        if(si_no==1) {
+        AgregarMasNumeros = deseaContinuar();
+
+        if(AgregarMasNumeros == 1) {
             mostrarCuadrodeDialogo();
-            si_no=cuadroContinuar();
+            AgregarMasNumeros = deseaContinuar();
+            //ingresarMasNumeros();
         }
+    }
 
+    public static int ingresarNumeroComponentes(){
+        do{
+            try{
+                numeroComponentes = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el número de componentes "));
+                if(numeroComponentes<1){
+                    JOptionPane.showMessageDialog(null,"Número ingresado no válido");
+                }
+            }catch (NumberFormatException ee){
+                JOptionPane.showMessageDialog(null,"Número ingresado no válido");
+            }
+        }while(numeroComponentes<1);
+        return numeroComponentes;
+    }
+
+    public static void ingresarMasNumeros() {
+        double numero = 0;
+        int AgregarMasNumeros;
+
+        do {
+            try {
+                mostrarCuadrodeDialogo();
+            } catch (NumberFormatException e) {
+                mostrarMensaje("Formato invalido, debe ingresar un número");
+            }
+        } while (numero != (double) numero);
+
+        AgregarMasNumeros = deseaContinuar();
 
     }
 }
