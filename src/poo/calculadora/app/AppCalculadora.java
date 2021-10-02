@@ -3,6 +3,7 @@ package poo.calculadora.app;
 import poo.calculadora.dominio.Calculadora;
 
 import javax.swing.*;
+import java.nio.channels.ClosedSelectorException;
 import java.util.ArrayList;
 
 public class AppCalculadora {
@@ -37,7 +38,6 @@ public class AppCalculadora {
                     break;
 
                 case OPCION_RESTAR:
-                    numeros = new ArrayList<Double>();
                     ingresarNumeros();
                     if(redondear.isSelected()) {
                         mostrarMensajeDato(Math.round(Calculadora.restar(numeros)));
@@ -48,7 +48,6 @@ public class AppCalculadora {
                     break;
 
                 case OPCION_MULTIPLICAR:
-                    numeros = new ArrayList<Double>();
                     ingresarNumeros();
                     if(redondear.isSelected()) {
                         mostrarMensajeDato(Math.round(Calculadora.multiplicar(numeros)));
@@ -75,8 +74,10 @@ public class AppCalculadora {
                     }
                     if(redondear.isSelected()) {
                         mostrarMensajeDato(Math.round(Calculadora.dividir(numeros)));
+                        System.out.println(Calculadora.dividir(numeros));
                     }else {
                         mostrarMensajeDato(Calculadora.dividir(numeros));
+                        System.out.println(Calculadora.dividir(numeros));
                     }
                     numeros.clear();
                     break;
@@ -99,9 +100,6 @@ public class AppCalculadora {
 
             if(opcionElegida==JOptionPane.CLOSED_OPTION) {
                 break;
-            }
-            if(opcionElegida==JOptionPane.CANCEL_OPTION) {
-
             }
         }
     }
@@ -128,7 +126,9 @@ public class AppCalculadora {
         switch (confirmacion) {
             case JOptionPane.YES_OPTION:
                 AgregarMasNumeros = 1;
-                ingresarMasNumeros();
+                break;
+            case JOptionPane.NO_OPTION:
+                AgregarMasNumeros = 0;
                 break;
             default:
                 break;
@@ -174,7 +174,6 @@ public class AppCalculadora {
         if(AgregarMasNumeros == 1) {
             mostrarCuadrodeDialogo();
             AgregarMasNumeros = deseaContinuar();
-            //ingresarMasNumeros();
         }
     }
 
@@ -192,19 +191,19 @@ public class AppCalculadora {
         return numeroComponentes;
     }
 
-    public static void ingresarMasNumeros() {
-        double numero = 0;
-        int AgregarMasNumeros;
-
-        do {
-            try {
-                mostrarCuadrodeDialogo();
-            } catch (NumberFormatException e) {
-                mostrarMensaje("Formato invalido, debe ingresar un número");
-            }
-        } while (numero != (double) numero);
-
-        AgregarMasNumeros = deseaContinuar();
-
-    }
+//    public static void ingresarMasNumeros() {
+//        double numero = 0;
+//        int AgregarMasNumeros;
+//
+//        do {
+//            try {
+//                mostrarCuadrodeDialogo();
+//            } catch (NumberFormatException e) {
+//                mostrarMensaje("Formato invalido, debe ingresar un número");
+//            }
+//        } while (numero != (double) numero);
+//
+//        AgregarMasNumeros = deseaContinuar();
+//
+//    }
 }

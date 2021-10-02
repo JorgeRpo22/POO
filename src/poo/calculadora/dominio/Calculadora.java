@@ -66,9 +66,17 @@ public class Calculadora {
 
         for (double num : numeros) {
             if (cont == 1) {
+                if (num == 0) {
+                    String dato = "Math ERROR";
+                    JOptionPane.showMessageDialog(null, dato, "Resultado", JOptionPane.INFORMATION_MESSAGE, null);
+                }
                 resultado = num;
                 cont++;
             } else {
+                if (num == 0) {
+                    String dato = "Math ERROR";
+                    JOptionPane.showMessageDialog(null, dato, "Resultado", JOptionPane.INFORMATION_MESSAGE, null);
+                }
                 resultado = resultado / num;
                 cont++;
             }
