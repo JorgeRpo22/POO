@@ -1,12 +1,7 @@
-package poo.calculadora.dominio;
-
-import poo.calculadora.app.AppCalculadora;
+package poo.desafio.calculadora.dominio;
 
 import javax.swing.*;
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.ArrayList;
-import java.util.List;
 
 public class Calculadora {
 

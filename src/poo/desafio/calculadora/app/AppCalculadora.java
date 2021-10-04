@@ -1,9 +1,8 @@
-package poo.calculadora.app;
+package poo.desafio.calculadora.app;
 
-import poo.calculadora.dominio.Calculadora;
+import poo.desafio.calculadora.dominio.Calculadora;
 
 import javax.swing.*;
-import java.nio.channels.ClosedSelectorException;
 import java.util.ArrayList;
 
 public class AppCalculadora {
