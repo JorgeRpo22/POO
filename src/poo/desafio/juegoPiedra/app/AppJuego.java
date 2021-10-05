@@ -31,19 +31,23 @@ public class AppJuego {
                     if (piedraPapelTijera.getNombreJugador() == null) {
                         piedraPapelTijera.setNombreJugador(ingresarNombre());
                     }
-                    JOptionPane.showMessageDialog(null, "Bienvenido "+piedraPapelTijera.getNombreJugador()+"");
-                    int jugadaPc = piedraPapelTijera.jugadaOrdenador();
+                    if (piedraPapelTijera.getVictoriasJugador()==0 && piedraPapelTijera.getVictoriasDeLaMaquina()==0 && piedraPapelTijera.getEmpates()==0){
+                        JOptionPane.showMessageDialog(null, "Bienvenido "+piedraPapelTijera.getNombreJugador()+"");
+                    }
+                    int jugadaPc = piedraPapelTijera.getJugadaDeLaMaquina();
                     int jugadaJugador = JOptionPane.showOptionDialog(null, "Selecciona tu jugada, "+piedraPapelTijera.getNombreJugador()+".","Piedra, Papel o Tijera",0, JOptionPane.QUESTION_MESSAGE, null, Arrays.asList("Piedra", "Papel", "Tijera").toArray(), null);
-                    String resultado = piedraPapelTijera.resultadoJuego(jugadaJugador);
+                    String resultado = piedraPapelTijera.resultadoJuego(jugadaJugador,jugadaPc);
                     JOptionPane.showMessageDialog(null, ""+piedraPapelTijera.getNombreJugador()+" seleccionó "+conversion(jugadaJugador)+"\n El ordenador seleccionó "+conversion(jugadaPc)+" \n \n"+resultado+"");
                     break;
 
                 case OPCION_PUNTAJE:
                     if (piedraPapelTijera.getNombreJugador() == null) {
-                        piedraPapelTijera.setNombreJugador(ingresarNombre());
+                        String advertencia = "\r   ¡Lo siento! \n \n Debes ingresar un nombre de jugador antes de ver la tabla de puntajes.";
+                        JOptionPane.showMessageDialog(null, advertencia);
+                    } else {
+                        String puntaje = " Puntaje: \n \n"+piedraPapelTijera.getNombreJugador()+": "+piedraPapelTijera.getVictoriasJugador()+"  Puntos \nOrdenador: "+piedraPapelTijera.getVictoriasDeLaMaquina()+"  Puntos \nEmpates: "+piedraPapelTijera.getEmpates()+"  Puntos";
+                        JOptionPane.showMessageDialog(null, puntaje);
                     }
-                    String puntaje = " Puntaje: \n \n"+piedraPapelTijera.getNombreJugador()+": "+piedraPapelTijera.getVictoriasJugador()+"  Puntos \nOrdenador: "+piedraPapelTijera.getVictoriasDeLaMaquina()+"  Puntos \nEmpates: "+piedraPapelTijera.getEmpates()+"  Puntos";
-                    JOptionPane.showMessageDialog(null, puntaje);
                     break;
 
                 case OPCION_INSTRUCCIONES:
@@ -77,12 +81,15 @@ public class AppJuego {
     }
 
     public static String conversion(int jugadaInt) {
-        if (jugadaInt == 1) {
+        if (jugadaInt == 0) {
             return "PIEDRA";
-        } else if (jugadaInt == 2) {
+        } else if (jugadaInt == 1) {
             return "PAPEL";
-        } else {
+        } else if (jugadaInt == 2) {
             return "TIJERA";
+        } else {
+            return null;
         }
     }
 }
+
