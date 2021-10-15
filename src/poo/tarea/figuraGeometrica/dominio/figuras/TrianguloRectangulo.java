@@ -17,7 +17,7 @@ public class TrianguloRectangulo extends Triangulo{
 
     @Override
     public double calcularPerimetro() {
-        double perimetroTriangulo = Math.sqrt(Math.pow(this.base, 2) + Math.pow(this.altura, 2));
+        double perimetroTriangulo = (Math.sqrt(Math.pow(this.base, 2) + Math.pow(this.altura, 2)) + this.altura + this.base);
         return perimetroTriangulo;
     }
 

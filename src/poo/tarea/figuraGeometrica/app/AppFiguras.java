@@ -23,15 +23,17 @@ public class AppFiguras {
 
         figuras.forEach(fig -> {
             if (fig instanceof Circulo) {
-                System.out.println(fig.calcularArea() + " cm");
-                System.out.println(fig.calcularPerimetro() + " cm");
+                System.out.println("\nCirculo");
+                System.out.println("\nEl área del circulo es: " + fig.calcularArea() + " cm cuadrados");
+                System.out.println("El perímetro del circulo es: " +fig.calcularPerimetro() + " cm");
             }
         });
 
         figuras.forEach(fig -> {
             if (fig instanceof TrianguloRectangulo) {
-                System.out.println(fig.calcularArea() + " cm");
-                System.out.println(fig.calcularPerimetro() + " cm");
+                System.out.println("\nTriangulo Rectangulo");
+                System.out.println("\nEl área del triangulo rectangulo es: " + fig.calcularArea() + " cm cuadrados");
+                System.out.println("El perímetro del triangulo rectangulo es: " + fig.calcularPerimetro() + " cm");
             }
         });
 
