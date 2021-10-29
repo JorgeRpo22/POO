@@ -15,4 +15,9 @@ public class Freelance extends Empleado{
         long saldo = valorHora*horasTrabajadas;
         return saldo;
     }
+
+    @Override
+    public String toString() {
+        return this.getNombre() + "78";
+    }
 }
