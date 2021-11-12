@@ -15,4 +15,9 @@ public class Libro extends Recurso implements Prestable {
     public void devolver() {
         prestado = false;
     }
+
+    @Override
+    public String toString() {
+        return this.getNombre();
+    }
 }

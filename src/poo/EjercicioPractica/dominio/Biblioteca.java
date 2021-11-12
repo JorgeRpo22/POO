@@ -60,7 +60,7 @@ public class Biblioteca {
         recursos.forEach(recurso -> {
             if (recurso.isPrestado() == true) {
                 cantidadPrestados.incrementAndGet();
-                System.out.println("Articulos prestados: " + recurso.getNombre());
+                System.out.println("Articulos prestados: " + recurso);
             }
         });
 
