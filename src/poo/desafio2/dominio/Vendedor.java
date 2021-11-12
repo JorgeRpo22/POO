@@ -28,4 +28,8 @@ public class Vendedor extends Directo{
         long saldo = super.calcularSalario() + calcularComision();
         return saldo;
     }
+
+    public long getVentasDelMes() {
+        return ventasDelMes;
+    }
 }
